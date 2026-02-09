@@ -27,3 +27,7 @@ jobs:
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
 
+    - name: Get Public IP
+      run: |
+        kubectl get service flask-blob-service
+
