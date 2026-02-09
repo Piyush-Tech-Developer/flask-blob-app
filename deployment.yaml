@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-blob
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: flask-blob
+  template:
+    metadata:
+      labels:
+        app: flask-blob
+    spec:
+      containers:
+      - name: flask-blob
+        image: myacr123.azurecr.io/flask-blob:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: STORAGE_ACCOUNT_URL
+          value: "https://mystorage123.blob.core.windows.net"
+        - name: CONTAINER_NAME
+          value: "files"
