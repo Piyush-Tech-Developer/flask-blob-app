@@ -14,11 +14,11 @@ spec:
     spec:
       containers:
       - name: flask-blob
-        image: myacr123.azurecr.io/flask-blob:latest
+        image: acrdockerupload.azurecr.io/flask-blob:latest
         ports:
         - containerPort: 5000
         env:
         - name: STORAGE_ACCOUNT_URL
-          value: "https://mystorage123.blob.core.windows.net"
+          value: "https://git1storage.blob.core.windows.net"
         - name: CONTAINER_NAME
-          value: "files"
+          value: "flask-blob-app-uploads"
