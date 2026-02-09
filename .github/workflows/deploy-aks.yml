@@ -23,6 +23,7 @@ jobs:
 
     - run: az aks get-credentials -n my-aks-cluster -g github-azure-rg
 
-    - run: kubectl apply -f deployment.yaml
-           kubectl apply -f service.yaml
+    - run: |
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
 
