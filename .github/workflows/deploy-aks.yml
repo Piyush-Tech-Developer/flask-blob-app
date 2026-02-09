@@ -1,0 +1,26 @@
+name: Deploy to AKS
+
+on:
+  workflow_run:
+    workflows: ["Build and Push to ACR"]
+    types: [completed]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - run: az aks get-credentials -n my-aks-cluster -g github-azure-rg
+
+    - run: kubectl apply -f k8s/
